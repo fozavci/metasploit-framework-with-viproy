@@ -1,0 +1,16 @@
+# Please only use postgresql bound to a TCP port.
+# Only postgresql is supportable for metasploit-framework
+# these days. (No SQLite, no MySQL).
+#
+# To set up a metasploit database, follow the directions hosted at:
+# https://fedoraproject.org/wiki/Metasploit_Postgres_Setup (Works on
+# essentially any Linux distro, not just Fedora)
+production: &production
+  adapter: postgresql
+  database: viproymsfrepo
+  username: postgres
+  password: fth977
+  host: localhost
+  port: 5432
+  pool: 5
+  timeout: 5

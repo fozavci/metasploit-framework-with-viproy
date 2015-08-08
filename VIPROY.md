@@ -7,10 +7,12 @@ http://www.viproy.com
 ## Metasploit Framework with Viproy installation
 * This Metasploit Framework repo that has Viproy installed is prepared for the workshop.
 * The Metasploit Framework installation instructions (http://r-7.co/MSF-DEV) are sufficient to install.  
-** Install Ruby 2.1.5 or 2.1.6
-** Install Bundle
-** Execute Bundle in the folder to install missing gems
-** Execute sample Viproy commands (https://github.com/fozavci/viproy-voipkit) to be sure the modules are working
+
+Basic installation instructions:
+* Install Ruby 2.1.5 or 2.1.6
+* Install Bundle
+* Execute Bundle in the folder to install missing gems
+* Execute sample Viproy commands (https://github.com/fozavci/viproy-voipkit) to be sure the modules are working
 
 ## VoIP Clients will be in use
 * Jitsi - https://jitsi.org

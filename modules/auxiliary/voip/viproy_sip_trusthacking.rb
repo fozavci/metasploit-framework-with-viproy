@@ -192,6 +192,8 @@ class Metasploit3 < Msf::Auxiliary
     # Sending creates errors, PacketFU debug is required.
     ret = send(p.ip_daddr,p)
 
+    print_status("Result: #{ret}")
+
     if ret == :done
       vprint_status("#{p.ip_saddr}: Packet sent to #{p.ip_daddr} from #{p.udp_sport}")
     else

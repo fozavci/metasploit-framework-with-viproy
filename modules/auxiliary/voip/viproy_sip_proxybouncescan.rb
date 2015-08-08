@@ -62,10 +62,10 @@ class Metasploit3 < Msf::Auxiliary
     sipsocket_start(sockinfo)
     sipsocket_connect
 
-    realm = datastore['REALM'] || "#{rhost}:#{rport}"
 
     rhosts.each do |rhost|
       rports.each do |rport|
+    	realm = datastore['REALM'] || "#{rhost}:#{rport}"
         results = send_options(
             'realm'		=> realm,
             'from'    	=> datastore['FROM'],
@@ -76,7 +76,7 @@ class Metasploit3 < Msf::Auxiliary
 
         rdata = results["rdata"]
 
-        if results["status"] == :received and ! (rdata['resp_msg'] =~ /timeout/)
+        if results["status"] =~ /received|succeed/ and ! (rdata['resp_msg'] =~ /timeout/)
           if rdata["contact"]
             report = "#{rdata["contact"].gsub("sip:","")} is Open\n"
           else

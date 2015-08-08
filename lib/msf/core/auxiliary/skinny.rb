@@ -305,6 +305,12 @@ module Msf
         when "7941g"
           # Cisco 7941G IP Phone
           dt = "\x73\x00\x00\x00"
+        when "7960g"
+          # Cisco 7960G IP Phone
+          dt = "\x07\x00\x00\x00"
+        when "7912g"
+          # Cisco 7912G IP Phone
+          dt = "\x37\x75\x00\x00"
         else
           # Cisco 7961G_GE IP Phone
           dt = "\x35\x01\x00\x00"

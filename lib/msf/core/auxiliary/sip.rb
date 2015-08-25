@@ -285,11 +285,8 @@ module Auxiliary::SIP
     login = req_options["login"] || false
     self.expire = req_options["expire"] || 3600
 
-    #    ADDED BY CHRIS - Sometimes the first REGISTER is sent with different FROM/TO
-    #    req_options['to'] = req_options['from']
-
     #From and TO fields should be Username for REGISTER
-    if datastore['USEREQFROM'] == true
+    if datastore['USEREQFROM'] == true and req_options['user'] != nil
         req_options['from'] = req_options['user']
         req_options['fromname'] = nil
         req_options['to'] = req_options['user']
@@ -566,6 +563,8 @@ module Auxiliary::SIP
   # Send Generic SIP Request
   #
   def generic_request(method,req_options={},no_response=false)
+    print_status("Generic Request:\n"+req_options.to_s)
+
     callopts,status=send_data(method,req_options)
     return nil if no_response
 

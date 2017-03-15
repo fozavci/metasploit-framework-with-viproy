@@ -34,7 +34,6 @@ module Auxiliary::SIP
 
     if vendor
       self.vendor = sockinfo["vendor"].downcase
-      self.vendor = sockinfo["vendor"].downcase
     else
       'generic'
     end
@@ -563,7 +562,7 @@ module Auxiliary::SIP
   # Send Generic SIP Request
   #
   def generic_request(method,req_options={},no_response=false)
-    print_status("Generic Request:\n"+req_options.to_s)
+    #print_status("Generic Request:\n"+req_options.to_s)
 
     callopts,status=send_data(method,req_options)
     return nil if no_response
@@ -711,7 +710,7 @@ module Auxiliary::SIP
     cnonce=Rex::Text.rand_text_alphanumeric(50)
     nc="00000001"
 
-    case digestopts['algorithm']
+    case digestopts['algorithm'].upcase
       when 'MD5-sess'
         h1 = Digest::MD5.hexdigest("#{digestopts['username']}:#{digestopts['realm']}:#{digestopts['password']}")
         hash1 = Digest::MD5.hexdigest("#{h1}:#{digestopts['nonce']}:#{cnonce}")
@@ -951,9 +950,9 @@ module Auxiliary::SIP
       data << "User-Agent: #{uagent}\r\n"
 
       if self.vendor != 'mslync'
-        data << "Supported: 100rel,replaces\r\n" if req_type != "OPTIONS"
-        data << "Allow: PRACK, INVITE ,ACK, BYE, CANCEL, UPDATE, SUBSCRIBE,NOTIFY, REFER, MESSAGE, OPTIONS\r\n"
-        data << "Expires: #{self.expire}\r\n"
+        #data << "Supported: 100rel,replaces\r\n" if req_type != "OPTIONS"
+        data << "Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO\r\n"
+        #data << "Expires: #{self.expire}\r\n"
       end
     end
 
@@ -1133,9 +1132,7 @@ module Auxiliary::SIP
     return customheader
   end
 
-  #There is a Bug in this function for WWW-Authentication !!!!!
-  #We're trying to fuck this function, I hope it works for the Proxy :)
-  # Parse the authentication
+
   def parse_auth(data)
     result={}
     str = ""
